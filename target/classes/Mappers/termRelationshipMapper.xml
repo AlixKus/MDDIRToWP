@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mcs.repository.termRelationshipMapper">
+	<resultMap id="BaseResultMap"
+		type="com.mcs.model.termRelationship">
+		<result column="object_id" jdbcType="BIGINT"
+			property="objectId" />
+		<result column="term_taxonomy_id" jdbcType="BIGINT"
+			property="termTaxonomyId" />
+		<result column="term_order" jdbcType="INTEGER"
+			property="termOrder" />
+	</resultMap>
+	<insert id="insert"
+		parameterType="com.mcs.model.termRelationship">
+		insert into wp_term_relationships (object_id, term_taxonomy_id, term_order
+		)
+		values (#{objectId,jdbcType=BIGINT}, #{termTaxonomyId,jdbcType=BIGINT},
+		#{termOrder,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.mcs.model.termRelationship">
+		insert into wp_term_relationships
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="objectId != null">
+				object_id,
+			</if>
+			<if test="termTaxonomyId != null">
+				term_taxonomy_id,
+			</if>
+			<if test="termOrder != null">
+				term_order,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="objectId != null">
+				#{objectId,jdbcType=BIGINT},
+			</if>
+			<if test="termTaxonomyId != null">
+				#{termTaxonomyId,jdbcType=BIGINT},
+			</if>
+			<if test="termOrder != null">
+				#{termOrder,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

@@ -15,14 +15,21 @@
 		#{slug,jdbcType=VARCHAR})
 	</insert>
 
-	<select id="slectByID" resultType="com.mcs.model.term">
+	<select id="selectByID" resultType="com.mcs.model.term">
 		select * from wp_terms
 		<where>
 			term_id = #{id}
 		</where>
 	</select>
 
-	<select id="slectAll" resultType="com.mcs.model.term">
+	<select id="selectAll" resultType="com.mcs.model.term">
 		select * from wp_terms
+	</select>
+	
+	<select id="selectByName" resultMap="BaseResultMap">
+		select * from wp_terms
+		<where>
+			name = #{name}
+		</where>
 	</select>
 </mapper>

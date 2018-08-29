@@ -6,7 +6,7 @@ class relationshipServiceTest {
 
 	@Test
 	void test() {
-		relationshipService s = new relationshipService();
+		
 
 	}
 

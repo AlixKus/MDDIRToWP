@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import com.mcs.md.MDParser;
 import com.mcs.service.catalogService;
 import com.mcs.service.postService;
 import com.mcs.service.relationshipService;
@@ -38,8 +39,9 @@ public class PraseDictoryService {
 		System.out.println(catalogName);
 		try {
 			Files.walk(p, 1).filter(md -> !md.equals(p)).forEach((md) -> {
-				String filename = md.getFileName().toString();
+				String filename = md.getFileName().toString().substring(md.getFileName().toString().indexOf("."));
 				String context = praseContext(md);
+				
 				// 注册文章
 				Long postId = ps.addPost(filename, context);
 
@@ -65,7 +67,8 @@ public class PraseDictoryService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return context;
+		String html = MDParser.renderHtml(context);
+		return html;
 
 	}
 

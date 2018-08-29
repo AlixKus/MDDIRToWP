@@ -2,6 +2,7 @@ package com.mcs.main;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 
 import com.mcs.filePrase.PraseDictoryService;
 import com.mcs.service.catalogService;
@@ -16,6 +17,7 @@ public class RunAppliction {
 
 	public void run()
 	{
+		
 		try {
 			new PraseDictoryService(rootLocation, cs, ps, rs).Parse();
 		} catch (Exception e) {

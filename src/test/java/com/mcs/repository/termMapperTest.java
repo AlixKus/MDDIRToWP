@@ -21,15 +21,21 @@ class termMapperTest {
 	}
 
 	@Test
-	void testslectByID() {
+	void testselectByID() {
 		Long id = 1L;
-		term t = mapper.slectByID(id);
+		term t = mapper.selectByID(id);
 		assertNotNull(t);
 	}
 
 	@Test
-	void testslectAll() {
-		List<term> results = mapper.slectAll();
+	void testselectAll() {
+		List<term> results = mapper.selectAll();
+		assertNotNull(results);
+	}
+
+	@Test
+	void testselectByName() {
+		List<term> results = mapper.selectByName("MySql");
 		assertNotNull(results);
 	}
 

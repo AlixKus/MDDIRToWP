@@ -30,11 +30,13 @@ public class MDAppliction {
 	}
 
 	public void run() {
+		log.info("-----------------START--------------");
 		try {
 			Files.walkFileTree(service.getRoot(), service);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		log.info("-----------------END--------------");
 	}
 }

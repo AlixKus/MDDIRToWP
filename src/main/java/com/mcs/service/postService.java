@@ -3,6 +3,7 @@ package com.mcs.service;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.mcs.model.postWithBLOBs;
@@ -14,11 +15,8 @@ public class postService {
 	@Autowired
 	private postMapper mapper;
 
+	@Value("${guidprefix}")
 	private String guidprefix;
-
-	public postService() {
-		guidprefix = "test";
-	}
 
 	public postService(String guidprefix) {
 		this.guidprefix = guidprefix;

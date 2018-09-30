@@ -4,9 +4,6 @@ import javax.sql.DataSource;
 
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -22,13 +19,6 @@ import com.zaxxer.hikari.HikariDataSource;
 @ComponentScan(basePackageClasses = MDAppliction.class)
 @PropertySource("classpath:/config.properties")
 public class RootConfig {
-	Logger log = LoggerFactory.getLogger(RootConfig.class);
-
-	@Bean
-	public String testProperties(@Value("${root}") String root) {
-		log.info(root);
-		return root;
-	}
 
 	@Bean
 	public DataSource HikariCP() {

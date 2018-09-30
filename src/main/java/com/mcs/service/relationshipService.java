@@ -1,13 +1,15 @@
 package com.mcs.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.mcs.model.termRelationship;
 import com.mcs.repository.termRelationshipMapper;
-import com.mcs.util.MapperUtil;
 
+@Service
 public class relationshipService {
-	termRelationshipMapper mapper = MapperUtil.getMapper(termRelationshipMapper.class);
-
-	
+	@Autowired
+	termRelationshipMapper mapper;
 
 	public void saveRelation(Long postId, Long catalodId) {
 		termRelationship trs = new termRelationship();

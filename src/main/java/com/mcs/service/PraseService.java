@@ -5,51 +5,45 @@ import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import com.mcs.md.MDParser;
+import org.springframework.stereotype.Service;
 
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.formatter.internal.Formatter;
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.profiles.pegdown.Extensions;
+import com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.MutableDataSet;
+
+@Service
 public class PraseService {
-	private Path rootLocation;
 
-	private catalogService cs;
-	private postService ps;
-	private relationshipService rs;
+	MutableDataSet options = new MutableDataSet();
+	Parser parser = Parser.builder(options).build();
+	HtmlRenderer renderer = HtmlRenderer.builder(options).build();
+	DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(Extensions.ALL);
+	MutableDataSet FORMAT_OPTIONS = new MutableDataSet();
+	Parser PARSER = Parser.builder(OPTIONS).build();
+	Formatter RENDERER = Formatter.builder(FORMAT_OPTIONS).build();
 
-	public PraseService(Path rootLocation, catalogService cs, postService ps, relationshipService rs) {
-		this.rootLocation = rootLocation;
-		this.cs = cs;
-		this.ps = ps;
-		this.rs = rs;
+	public PraseService() {
+		FORMAT_OPTIONS.set(Parser.EXTENSIONS, OPTIONS.get(Parser.EXTENSIONS));
 	}
 
-	public void Parse() throws Exception {
-		Files.walk(rootLocation, 1).filter((p) -> !p.equals(rootLocation)).forEach(p -> {
-			ParseDir(p);
-		});
+	public String renderHtml(String md) {
+		String commonmark = commonmark(md);
+		Node document = parser.parse(commonmark);
+		return renderer.render(document);
+
 	}
 
-	private void ParseDir(Path p) {
-		if (!p.toFile().isDirectory())
-			return;
-		String catalogName = p.getFileName().toString();
-		// 注册目录
-		Long catlogid = cs.addCatalog(catalogName);
-		System.out.println(catalogName);
-		try {
-			Files.walk(p, 1).filter(md -> !md.equals(p)).forEach((md) -> {
-				String filename = md.getFileName().toString().substring(md.getFileName().toString().indexOf("."));
-				String context = praseContext(md);
-				
-				// 注册文章
-				Long postId = ps.addPost(filename, context);
-
-				// 保存关联
-				rs.saveRelation(postId, catlogid);
-			});
-		} catch (Exception e) {
-		}
+	private String commonmark(String md) {
+		Node document = PARSER.parse(md);
+		return RENDERER.render(document);
 	}
 
-	private String praseContext(Path md) {
+	public String praseContext(Path md) {
 		String context = null;
 		byte[] bs = null;
 		try {
@@ -64,17 +58,9 @@ public class PraseService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String html = MDParser.renderHtml(context);
+		String html = renderHtml(context);
 		return html;
 
-	}
-
-	public Path getRootLocation() {
-		return rootLocation;
-	}
-
-	public void setRootLocation(Path rootLocation) {
-		this.rootLocation = rootLocation;
 	}
 
 }

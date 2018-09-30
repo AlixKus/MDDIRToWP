@@ -36,4 +36,10 @@ public class termService {
 		return insertTerm(name, name, 0);
 	}
 
+	public taxonomy insertTerm(String name, String parentName) {
+		Long parentID = tMapper.findIDByName(parentName);
+		if (parentID == null)
+			parentID = 0L;
+		return insertTerm(name, name, parentID);
+	}
 }

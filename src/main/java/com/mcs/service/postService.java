@@ -18,6 +18,11 @@ public class postService {
 	@Value("${guidprefix}")
 	private String guidprefix;
 
+	public postService()
+	{
+		
+	}
+	
 	public postService(String guidprefix) {
 		this.guidprefix = guidprefix;
 	}

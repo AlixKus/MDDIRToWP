@@ -15,10 +15,10 @@
     description
   </sql>
   <insert id="insert" parameterType="com.mcs.model.taxonomy" useGeneratedKeys="true" keyProperty="termTaxonomyId">
-    insert into wp_term_taxonomy (term_taxonomy_id, term_id, taxonomy, 
+    insert into wp_term_taxonomy ( term_id, taxonomy, 
       parent, count, description
       )
-    values (#{termTaxonomyId,jdbcType=BIGINT}, #{termId,jdbcType=BIGINT}, #{taxonomy,jdbcType=VARCHAR}, 
+    values (#{termId,jdbcType=BIGINT}, #{taxonomy,jdbcType=VARCHAR}, 
       #{parent,jdbcType=BIGINT}, #{count,jdbcType=BIGINT}, #{description,jdbcType=LONGVARCHAR}
       )
   </insert>

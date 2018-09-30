@@ -2,9 +2,8 @@ package com.mcs.main;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.Principal;
 
-import com.mcs.filePrase.PraseDictoryService;
+import com.mcs.service.PraseService;
 import com.mcs.service.catalogService;
 import com.mcs.service.postService;
 import com.mcs.service.relationshipService;
@@ -15,18 +14,16 @@ public class RunAppliction {
 	relationshipService rs = new relationshipService();
 	Path rootLocation = Paths.get("E:\\study");
 
-	public void run()
-	{
-		
+	public void run() {
 		try {
-			new PraseDictoryService(rootLocation, cs, ps, rs).Parse();
+			new PraseService(rootLocation, cs, ps, rs).Parse();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		};
+		}
+		;
 		System.out.println("End");
 	}
-	
+
 	public static void main(String[] args) {
 		new RunAppliction().run();
 	}

@@ -1,4 +1,4 @@
-package com.mcs.filePrase;
+package com.mcs.service;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -6,18 +6,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import com.mcs.md.MDParser;
-import com.mcs.service.catalogService;
-import com.mcs.service.postService;
-import com.mcs.service.relationshipService;
 
-public class PraseDictoryService {
+public class PraseService {
 	private Path rootLocation;
 
 	private catalogService cs;
 	private postService ps;
 	private relationshipService rs;
 
-	public PraseDictoryService(Path rootLocation, catalogService cs, postService ps, relationshipService rs) {
+	public PraseService(Path rootLocation, catalogService cs, postService ps, relationshipService rs) {
 		this.rootLocation = rootLocation;
 		this.cs = cs;
 		this.ps = ps;

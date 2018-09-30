@@ -16,7 +16,7 @@ public class termService {
 	@Autowired
 	taxonomyMapper tMapper;
 
-	public long insertTerm(String name, String slug, long parentID) {
+	public taxonomy insertTerm(String name, String slug, long parentID) {
 		term t = new term();
 		t.setName(name);
 		t.setSlug(slug);
@@ -25,14 +25,15 @@ public class termService {
 		ty.setTermId(t.getTermId());
 		ty.setParent(parentID);
 		tMapper.insert(ty);
-		return ty.getTermTaxonomyId();
+		return ty;
 	}
 
-	public long insertTerm(String name, long parentID) {
+	public taxonomy insertTerm(String name, long parentID) {
 		return insertTerm(name, name, parentID);
 	}
 
-	public long insertTerm(String name) {
+	public taxonomy insertTerm(String name) {
 		return insertTerm(name, name, 0);
 	}
+
 }

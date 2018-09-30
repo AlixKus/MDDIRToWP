@@ -9,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.mcs.config.RootConfig;
-import com.mcs.model.option;
+import com.mcs.model.taxonomy;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = RootConfig.class)
@@ -17,16 +17,16 @@ public class optionMapperTest {
 	@Autowired
 	CategoryService service;
 
+	@Autowired
+	termService tService;
+
 	Logger log = LoggerFactory.getLogger(optionMapperTest.class);
 
 	@Test
 	void test1() {
-		option c = service.getCategoryChildren();
-		log.info(c.getOption_value());
+		taxonomy t = tService.insertTerm("test666", 2L);
+		service.insertCategory(t);
+
 	}
 
-	@Test
-	void test2() {
-		service.updateCategoryChildren("a:1:{i:2;a:2:{i:0;i:3;i:1;i:11;}}");
-	}
 }

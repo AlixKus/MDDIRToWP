@@ -7,3 +7,5 @@ guidprefix 文章网站guid前缀
 jdbcUrl 为你的数据库url 注意要加上useUnicode=true&characterEncoding=utf8，否则中文会乱码
 username 为你的数据库用户名
 password 为你的数据库密码
+
+## 运行MDAppliction 

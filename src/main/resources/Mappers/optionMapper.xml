@@ -6,7 +6,8 @@
 		where option_name = #{name}
 	</select>
 	<update id="updateOptionValueByname">
-		UPDATE `wp`.`wp_options` SET `option_value` = #{val}
-		WHERE `option_name` = #{name}
+		UPDATE wp_options SET option_value = #{val}
+		WHERE
+		option_name = #{name}
 	</update>
 </mapper>

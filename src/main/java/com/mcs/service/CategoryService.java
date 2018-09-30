@@ -28,6 +28,8 @@ public class CategoryService {
 
 	public void insertCategory(taxonomy t) {
 		option c = getCategoryChildren();
+		if (c == null)
+			return;
 		String val = c.getOption_value();
 		MixedArray a = Pherialize.unserialize(val).toArray();
 		MixedArray chd;
